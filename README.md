@@ -32,7 +32,7 @@ by using go install.
 Download tool:
 
 ```bash
-go install github.com/EricNeid/go-checksum/cmd/checksum@v0.1.0
+go install github.com/EricNeid/go-checksum/cmd/checksum@latest
 ```
 
 ## Usage
@@ -47,7 +47,7 @@ go install github.com/EricNeid/go-checksum/cmd/checksum
 Make sure that $GOPATH/bin is in your path.
 
 ```bash
-checksum -check md5 -f fileToCheck
+checksum -c md5 -f fileToCheck
 ```
 
 ## Question or comments
