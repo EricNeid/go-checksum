@@ -4,10 +4,15 @@ package main
 
 import (
 	"crypto/md5"
+	"crypto/sha1"
+	"crypto/sha256"
+	"crypto/sha512"
 	"flag"
-	"fmt"
+	"hash"
+	"io"
 	"log"
 	"os"
+	"strings"
 )
 
 var (
@@ -27,11 +32,7 @@ func main() {
 	flag.Parse()
 
 	// prepare input reader
-
-	data, _ := os.ReadFile(filePath) // Textmodus, evtl. Encoding-Probleme
-	fmt.Println(md5.Sum(data))
-
-	/*var input io.Reader
+	var input io.Reader
 	if filePath != "" {
 		file, err := os.Open(filePath)
 		if err != nil {
@@ -46,29 +47,29 @@ func main() {
 	} else {
 		log.Println("Usage: checksum -check=md5 stringTocheck")
 		return
-	}*/
-	/*
-		// select hash algorithm
-		var hash hash.Hash
-		switch hashAlg {
-		case "md5":
-			hash = md5.New()
-		case "sha1":
-			hash = sha1.New()
-		case "sha256":
-			hash = sha256.New()
-		case "sha512":
-			hash = sha512.New()
-		default:
-			log.Fatalf("Unknown checksum algorithm requested: %s\n", hashAlg)
-			return
-		}
+	}
 
-		// apply hash algorithm
-		if _, err := io.Copy(hash, input); err != nil {
-			log.Fatalln("Error while calculating hash", err.Error())
-			return
-		}
+	// select hash algorithm
+	var hash hash.Hash
+	switch hashAlg {
+	case "md5":
+		hash = md5.New()
+	case "sha1":
+		hash = sha1.New()
+	case "sha256":
+		hash = sha256.New()
+	case "sha512":
+		hash = sha512.New()
+	default:
+		log.Fatalf("Unknown checksum algorithm requested: %s\n", hashAlg)
+		return
+	}
 
-		log.Printf("%s  %x", hashAlg, hash.Sum(nil))*/
+	// apply hash algorithm
+	if _, err := io.Copy(hash, input); err != nil {
+		log.Fatalln("Error while calculating hash", err.Error())
+		return
+	}
+
+	log.Printf("%s  %x", hashAlg, hash.Sum(nil))
 }
