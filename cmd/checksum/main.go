@@ -28,6 +28,8 @@ func init() {
 func main() {
 	// check arguments
 	flag.StringVar(&hashAlg, "check", "md5", "checksum algorithm (md5, sha1, sha256)")
+	flag.StringVar(&hashAlg, "c", "md5", "checksum algorithm (md5, sha1, sha256)")
+	flag.StringVar(&filePath, "file", filePath, "optional file to check")
 	flag.StringVar(&filePath, "f", filePath, "optional file to check")
 	flag.Parse()
 
