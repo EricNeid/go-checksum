@@ -32,7 +32,10 @@ by using go install.
 Download tool:
 
 ```bash
+# get latest version
 go install github.com/EricNeid/go-checksum/cmd/checksum@latest
+# or get specific version
+go install github.com/EricNeid/go-checksum/cmd/checksum@v0.1.0
 ```
 
 ## Usage
